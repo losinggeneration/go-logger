@@ -145,7 +145,7 @@ func BenchmarkNewWorker(b *testing.B) {
 
 func TestLogger_SetFormat(t *testing.T) {
 	var buf bytes.Buffer
-	log, err := New("pkgname", 0, &buf)
+	log, err := New("pkgname", 0, &buf, DebugLevel)
 	if err != nil || log == nil {
 		panic(err)
 	}
@@ -240,12 +240,12 @@ func TestLogLevel(t *testing.T) {
 			"Notice Logging",
 		},
 		{
-			DebugLevel,
-			"Debug logging",
-		},
-		{
 			InfoLevel,
 			"Info Logging",
+		},
+		{
+			DebugLevel,
+			"Debug logging",
 		},
 	}
 
@@ -262,8 +262,8 @@ func TestLogLevel(t *testing.T) {
 		log.Error("Log Error")
 		log.Warning("Log Warning")
 		log.Notice("Log Notice")
-		log.Debug("Log Debug")
 		log.Info("Log Info")
+		log.Debug("Log Debug")
 
 		// Count output lines from logger
 		count := strings.Count(buf.String(), "\n")
